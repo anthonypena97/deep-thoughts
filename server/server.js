@@ -39,13 +39,16 @@ app.use(express.json());
 
 // Serve up static assets
 if (process.env.NODE_ENV === 'production') {
+  console.log("hello");
+  console.log(process.env.NODE_ENV);
   app.use(express.static(path.join(__dirname, '../client/build')));
-}
 
-// WILDCARD ROUTE
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+  // WILDCARD ROUTE
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+
+}
 
 db.once('open', () => {
   app.listen(PORT, () => {
